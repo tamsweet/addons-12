@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xray – Lightning fast PHP debugging</title>
+    <meta
+      name="description"
+      content="Xray is a modern desktop companion for PHP debugging. Trace, inspect, and collaborate on your application state with fluid workflows inspired by Ray."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <span class="beam"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="brand-name">Xray</span>
+        </div>
+        <nav class="primary-nav" aria-label="Primary">
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul id="nav-menu">
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#compare">Compare</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <a class="cta ghost" href="#download">Download</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="download">
+        <div class="container">
+          <div class="hero-copy">
+            <span class="pill">Inspired by Ray, tuned for your team</span>
+            <h1>Debug PHP like it is 2024.</h1>
+            <p>
+              Xray brings elegant, cross-platform insights into your PHP runtime.
+              Snapshots, live streams, and opinionated tooling help you see your
+              application the moment it changes.
+            </p>
+            <div class="cta-row">
+              <a class="cta primary" href="#pricing">Start free trial</a>
+              <a class="cta secondary" href="#tour">Watch product tour</a>
+            </div>
+            <div class="meta">
+              <span>Works with Laravel, Symfony, WordPress &amp; more.</span>
+              <span>macOS, Windows &amp; Linux desktop apps.</span>
+            </div>
+          </div>
+          <div class="hero-card" role="region" aria-label="Interactive Xray debugging timeline">
+            <div class="card-header">
+              <span class="status-dot"></span>
+              <span class="status-dot"></span>
+              <span class="status-dot"></span>
+              <span class="card-title" data-card-title>Xray – Local request stream</span>
+            </div>
+            <div
+              class="scenario-controls"
+              role="tablist"
+              aria-label="Toggle between Xray debugging modes"
+            >
+              <button
+                class="scenario-btn active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-scenario="local"
+              >
+                Local run
+              </button>
+              <button
+                class="scenario-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-scenario="cloud"
+              >
+                Team cloud
+              </button>
+              <button
+                class="scenario-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-scenario="production"
+              >
+                Production alert
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="timeline" data-timeline>
+                <div class="event">
+                  <span class="event-time">12:21:08</span>
+                  <div>
+                    <p class="event-title">POST /api/orders</p>
+                    <p class="event-meta">Queued Job dispatched in 24ms</p>
+                  </div>
+                  <span class="badge badge-success">OK</span>
+                </div>
+                <div class="event">
+                  <span class="event-time">12:21:15</span>
+                  <div>
+                    <p class="event-title">Cache::remember('customers')</p>
+                    <p class="event-meta">Hit | payload 2.1KB</p>
+                  </div>
+                  <span class="badge badge-neutral">Cache</span>
+                </div>
+                <div class="event focused">
+                  <span class="event-time">12:21:21</span>
+                  <div>
+                    <p class="event-title">Xray::inspect($order)</p>
+                    <pre><code>{
+  "id": 7132,
+  "status": "awaiting_pickup",
+  "total": 249.99,
+  "customer": "Eunice Reed"
+}</code></pre>
+                  </div>
+                  <span class="badge badge-focus">Pinned</span>
+                </div>
+                <div class="event">
+                  <span class="event-time">12:21:31</span>
+                  <div>
+                    <p class="event-title">Xray::measure(fn)</p>
+                    <p class="event-meta">42ms | Memory +3MB</p>
+                  </div>
+                  <span class="badge badge-warning">Perf</span>
+                </div>
+              </div>
+              <aside class="ai-callout" data-ai-callout>
+                <h4>AI insight</h4>
+                <p>
+                  Sampling a Laravel webhook locally. AI watches for missing validation and
+                  suggests stronger defaults when payloads arrive empty.
+                </p>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="problem" id="problem">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">Why debugging stalls</span>
+            <h2>Legacy tools bury the signal in a wall of noise.</h2>
+            <p>
+              Teams lose hours jumping between dumps, logs, and screenshots. Xray restructures
+              every clue so you can act in seconds instead of waiting for the next failure.
+            </p>
+          </header>
+          <div class="problem-grid">
+            <article class="problem-card">
+              <h3>Debugging is messy</h3>
+              <p>
+                Traditional <code>dd()</code> and <code>var_dump()</code> calls spit out hundreds of unreadable
+                lines. Developers scroll, copy, and paste just to understand nested data.
+              </p>
+              <ul>
+                <li>Flatten sprawling arrays into collapsible trees.</li>
+                <li>Snapshot every change in a structured timeline.</li>
+              </ul>
+            </article>
+            <article class="problem-card">
+              <h3>“Works on my machine”</h3>
+              <p>
+                Bugs appear only on specific devices or regions. Sharing raw logs through chat
+                leaves teammates without the right environment or context.
+              </p>
+              <ul>
+                <li>Reproduce any session with dependency-aware playbacks.</li>
+                <li>Stream live state to remote collaborators instantly.</li>
+              </ul>
+            </article>
+            <article class="problem-card">
+              <h3>Production hides the truth</h3>
+              <p>
+                Edge cases surface when real customers hit production routes. Centralized logs
+                and PII make triage slow and risky.
+              </p>
+              <ul>
+                <li>Securely scrub sensitive payloads before they leave the box.</li>
+                <li>Group recurring errors with AI-assisted clustering.</li>
+              </ul>
+            </article>
+            <article class="problem-card">
+              <h3>Tools don’t collaborate</h3>
+              <p>
+                Emailing stack traces or screenshots invites duplicate work. Hand-offs stall the
+                fix while customers churn.
+              </p>
+              <ul>
+                <li>Comment, assign, and review inside a shared debugging cockpit.</li>
+                <li>Trigger alerts in Slack, Teams, or Jira the moment AI spots anomalies.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="trusted">
+        <div class="container">
+          <p>Trusted by engineering teams shipping billions of requests every month.</p>
+          <div class="logo-row" aria-hidden="true">
+            <span>ForgeCollective</span>
+            <span>Octane Labs</span>
+            <span>Symfa</span>
+            <span>Nova Stack</span>
+            <span>Valet Studio</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-grid" id="features">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">Feature highlights</span>
+            <h2>Everything you expect from Ray, plus the things you wished for.</h2>
+            <p>
+              Bring a visual debugger to any PHP project with a refined interface,
+              structured context, and collaboration built-in.
+            </p>
+          </header>
+          <div class="grid">
+            <article class="feature-card">
+              <h3>Universal insights</h3>
+              <p>
+                Connect via Composer, Docker, or CLI. Xray auto-detects
+                frameworks and tailors payload previews for Laravel, Symfony,
+                Drupal, and vanilla PHP.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Live timeline</h3>
+              <p>
+                Stream requests, jobs, and artisan commands in a single,
+                chronological view. Pin snapshots and create shareable
+                investigations for your teammates.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Context capture</h3>
+              <p>
+                Dive into stack traces, database queries, cache hits, and HTTP
+                payloads without leaving your keyboard. Use quick filters to find
+                the exact event you need.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Team presence</h3>
+              <p>
+                Invite teammates to follow your session, leave annotations, and
+                sync breakpoints across environments without leaking secrets.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="solution" id="solution">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">The Xray platform</span>
+            <h2>Visual, AI-assisted debugging across every environment.</h2>
+            <p>
+              Toggle between local, cloud, and AI capabilities to see how Xray guides developers
+              from the first stack trace to a production-ready fix.
+            </p>
+          </header>
+          <div class="solution-tabs" role="tablist" aria-label="Explore Xray capabilities">
+            <button
+              class="solution-tab active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-tab="local"
+            >
+              Local debugger
+            </button>
+            <button
+              class="solution-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="cloud"
+            >
+              Cloud workspace
+            </button>
+            <button
+              class="solution-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="ai"
+            >
+              AI copilots
+            </button>
+          </div>
+          <div class="solution-panels">
+            <article
+              class="solution-panel active"
+              data-panel="local"
+              role="tabpanel"
+              aria-label="Local debugger"
+            >
+              <h3>Own your local loop</h3>
+              <p>
+                Connect via Composer, Docker, or CLI. Visual timelines, collapsible payloads, and
+                keyboard shortcuts keep focus on the code that matters while you iterate.
+              </p>
+              <ul class="checklist">
+                <li>Live timeline for requests, jobs, cache, and events.</li>
+                <li>Inspector for variables, queries, queues, and performance metrics.</li>
+                <li>Desktop apps for macOS, Windows, and Linux with offline mode.</li>
+              </ul>
+            </article>
+            <article
+              class="solution-panel"
+              data-panel="cloud"
+              role="tabpanel"
+              aria-label="Cloud workspace"
+              hidden
+            >
+              <h3>Share context instantly</h3>
+              <p>
+                Capture debugging sessions in the cloud, assign teammates, and retain every
+                insight. The dashboard turns sporadic incidents into repeatable workflows.
+              </p>
+              <ul class="checklist">
+                <li>Persistent session history with environment-aware metadata.</li>
+                <li>Role-based access, SSO, and encrypted secret vaults.</li>
+                <li>Automation blueprints to replay incidents and ship fixes faster.</li>
+              </ul>
+            </article>
+            <article
+              class="solution-panel"
+              data-panel="ai"
+              role="tabpanel"
+              aria-label="AI copilots"
+              hidden
+            >
+              <h3>Let AI surface the fix</h3>
+              <p>
+                An embedded LLM clusters similar errors, identifies root causes, and proposes
+                validation, performance, or architectural improvements before you ask.
+              </p>
+              <ul class="checklist">
+                <li>Spot null references, missing validation, and slow queries automatically.</li>
+                <li>Generate remediation checklists tailored to your stack.</li>
+                <li>Control costs with on-demand or cached analysis per incident.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow" id="workflow">
+        <div class="container">
+          <div class="workflow-copy">
+            <span class="pill">Designed for flow</span>
+            <h2>Your debugging ritual, upgraded.</h2>
+            <p>
+              Xray keeps the smooth feel from Ray and adds intelligent
+              automation. Automatic environment profiles, request correlation,
+              and searchable timelines make deep dives effortless.
+            </p>
+            <ul class="checklist">
+              <li>Record and replay debugging sessions with a click.</li>
+              <li>Sync breakpoints from PhpStorm, VS Code, or Neovim.</li>
+              <li>Send alerts to Slack or Teams when a watch expression changes.</li>
+              <li>Use powerful keyboard-driven command palette for every action.</li>
+            </ul>
+          </div>
+          <div class="workflow-card" id="tour">
+            <header>
+              <span class="badge badge-focus">Session Composer</span>
+              <h3>Automation blueprints</h3>
+            </header>
+            <p>
+              Build repeatable troubleshooting flows with triggers and actions.
+              Mix PHP scripts, HTTP calls, and shell commands to recreate
+              production issues safely.
+            </p>
+            <div class="blueprint">
+              <div class="blueprint-step">
+                <span class="step-index">1</span>
+                <div>
+                  <h4>Capture incoming webhook</h4>
+                  <p>Record headers, payload, and execution environment.</p>
+                </div>
+              </div>
+              <div class="blueprint-step">
+                <span class="step-index">2</span>
+                <div>
+                  <h4>Replay with mocked dependencies</h4>
+                  <p>Swap services with sandboxed mocks to isolate issues.</p>
+                </div>
+              </div>
+              <div class="blueprint-step">
+                <span class="step-index">3</span>
+                <div>
+                  <h4>Share instant report</h4>
+                  <p>Generate a secure link with logs, metrics, and attachments.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison" id="compare">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">Xray vs Ray</span>
+            <h2>Why teams upgrade to Xray</h2>
+            <p>
+              Keep the familiar Ray workflow and add collaborative features,
+              security controls, and automation.
+            </p>
+          </header>
+          <div class="comparison-table" role="table" aria-label="Comparison between Xray and Ray">
+            <div class="row header" role="row">
+              <div role="columnheader">Capability</div>
+              <div role="columnheader">Ray</div>
+              <div role="columnheader">Xray</div>
+            </div>
+            <div class="row" role="row">
+              <div role="cell">Live team sessions</div>
+              <div role="cell">Manual handoff</div>
+              <div role="cell" class="highlight">Real-time collaboration</div>
+            </div>
+            <div class="row" role="row">
+              <div role="cell">Timeline search</div>
+              <div role="cell">Limited filters</div>
+              <div role="cell" class="highlight">Global search with AI insights</div>
+            </div>
+            <div class="row" role="row">
+              <div role="cell">Automation blueprints</div>
+              <div role="cell">Not available</div>
+              <div role="cell" class="highlight">Reusable workflows &amp; triggers</div>
+            </div>
+            <div class="row" role="row">
+              <div role="cell">Security controls</div>
+              <div role="cell">Local only</div>
+              <div role="cell" class="highlight">Vaulted secrets &amp; access roles</div>
+            </div>
+            <div class="row" role="row">
+              <div role="cell">Integrations</div>
+              <div role="cell">Laravel, Symfony</div>
+              <div role="cell" class="highlight">+ WordPress, Drupal, Magento, custom apps</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing" id="pricing">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">Pricing for teams</span>
+            <h2>Simple plans for individuals and companies</h2>
+            <p>Start with a free 14-day trial. Cancel anytime. No credit card required.</p>
+          </header>
+          <div class="billing-toggle" role="group" aria-label="Switch between monthly and annual pricing">
+            <button class="billing-btn active" type="button" data-billing="monthly">Monthly</button>
+            <button class="billing-btn" type="button" data-billing="annual">Annual (save 20%)</button>
+          </div>
+          <div class="pricing-grid">
+            <article class="pricing-card">
+              <h3>Solo</h3>
+              <p
+                class="price"
+                data-price-solo
+                data-monthly="12"
+                data-annual="115"
+                data-unit-month="/month"
+                data-unit-annual="/year"
+              >
+                $12<span>/month</span>
+              </p>
+              <p class="subtitle">For indie developers and freelancers.</p>
+              <ul>
+                <li>Unlimited local projects</li>
+                <li>1 concurrent session</li>
+                <li>Native apps for macOS, Windows, Linux</li>
+                <li>Email support</li>
+              </ul>
+              <a class="cta primary" href="#download">Start trial</a>
+            </article>
+            <article class="pricing-card featured">
+              <span class="badge badge-focus">Popular</span>
+              <h3>Studio</h3>
+              <p
+                class="price"
+                data-price-studio
+                data-monthly="29"
+                data-annual="279"
+                data-unit-month="/seat"
+                data-unit-annual="/seat/year"
+              >
+                $29<span>/seat</span>
+              </p>
+              <p class="subtitle">For product teams shipping weekly.</p>
+              <ul>
+                <li>Unlimited collaborative sessions</li>
+                <li>Automation blueprints &amp; webhooks</li>
+                <li>Role-based access control</li>
+                <li>Priority support</li>
+              </ul>
+              <a class="cta primary" href="#download">Start trial</a>
+            </article>
+            <article class="pricing-card">
+              <h3>Enterprise</h3>
+              <p class="price">Let’s talk</p>
+              <p class="subtitle">For organizations with governance needs.</p>
+              <ul>
+                <li>Self-hosted deployment</li>
+                <li>SSO with SAML/SCIM</li>
+                <li>Audit-ready logging</li>
+                <li>Dedicated success engineer</li>
+              </ul>
+              <a class="cta secondary" href="mailto:hello@xray.app">Book a demo</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="roi" aria-label="ROI calculator for Xray">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">Quantify the impact</span>
+            <h2>See how many engineering weeks you save.</h2>
+            <p>
+              Adjust the sliders to model your team. Xray reduces the time to discover, reproduce,
+              and fix bugs across environments.
+            </p>
+          </header>
+          <div class="roi-calculator">
+            <div class="roi-input">
+              <label for="team-size">Team size</label>
+              <input type="range" id="team-size" min="1" max="50" value="8" />
+              <output id="team-size-output" for="team-size">8 developers</output>
+            </div>
+            <div class="roi-input">
+              <label for="incidents">Incidents per month</label>
+              <input type="range" id="incidents" min="1" max="40" value="6" />
+              <output id="incidents-output" for="incidents">6 incidents</output>
+            </div>
+            <div class="roi-input">
+              <label for="hours">Hours saved per incident</label>
+              <input type="range" id="hours" min="1" max="6" value="3" step="1" />
+              <output id="hours-output" for="hours">3 hours</output>
+            </div>
+          </div>
+          <div class="roi-results">
+            <div>
+              <h3>Annual hours recovered</h3>
+              <p><span id="hours-recovered">0</span> hours</p>
+            </div>
+            <div>
+              <h3>Engineering weeks unlocked</h3>
+              <p><span id="weeks-recovered">0</span> weeks</p>
+            </div>
+            <div>
+              <h3>Estimated value</h3>
+              <p>$<span id="value-recovered">0</span> saved per year</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">From the community</span>
+            <h2>Developers love the clarity of Xray</h2>
+            <p>
+              Join thousands of engineers replacing scattered logs with a coherent debugging cockpit.
+            </p>
+          </header>
+          <div class="testimonial-grid">
+            <article>
+              <p>
+                “Xray elevated our support rotations. Sharing a reproducible session link is faster than trying to describe stack traces in Slack.”
+              </p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">AR</span>
+                <div>
+                  <h3>Alana Rivera</h3>
+                  <p>Lead Developer, ForgeCollective</p>
+                </div>
+              </div>
+            </article>
+            <article>
+              <p>
+                “The automation blueprints helped us capture a production race condition within hours. Ray inspired us—Xray finished the job.”
+              </p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">MT</span>
+                <div>
+                  <h3>Mahdi Tanaka</h3>
+                  <p>Principal Engineer, Octane Labs</p>
+                </div>
+              </div>
+            </article>
+            <article>
+              <p>
+                “Session collaboration removes friction between backend and QA. We debug together, annotate, and ship fixes without miscommunication.”
+              </p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">JP</span>
+                <div>
+                  <h3>Jamal Peters</h3>
+                  <p>QA Manager, Valet Studio</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <div class="container">
+          <header class="section-header">
+            <span class="pill">FAQ</span>
+            <h2>Frequently asked questions</h2>
+            <p>Everything you need to know before installing Xray.</p>
+          </header>
+          <div class="faq-grid">
+            <article class="faq-item open">
+              <button class="faq-question" type="button" aria-expanded="true">
+                <span>How does Xray connect to my project?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Install the Composer package or drop the PHAR into your stack. A lightweight agent
+                  streams debugging events to the desktop app via secure websockets.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                <span>Can I use Xray alongside Ray?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Yes. Xray respects existing Ray calls and extends them with timeline metadata. You
+                  can even run both apps simultaneously while evaluating Xray in your workflow.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                <span>What about sensitive data?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Secrets never leave your environment. Mask fields globally, scrub payloads with custom
+                  rules, and audit access through immutable logs.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                <span>Do you support CI environments?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Use the headless CLI to capture traces directly in CI/CD. Export HTML or JSON reports,
+                  then attach them to pull requests or issue trackers automatically.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-banner">
+        <div class="container">
+          <div>
+            <h2>Ready to see your PHP applications with Xray clarity?</h2>
+            <p>
+              Download the desktop companion and start your free trial. Your
+              future self will thank you when the next bug hits production.
+            </p>
+          </div>
+          <div class="cta-row">
+            <a class="cta primary" href="#download">Download Xray</a>
+            <a class="cta ghost" href="mailto:hello@xray.app">Talk to sales</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <span class="beam"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="brand-name">Xray</span>
+        </div>
+        <p>&copy; <span id="year"></span> Xray Labs. All rights reserved.</p>
+        <nav aria-label="Footer">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">Support</a>
+          <a href="mailto:hello@xray.app">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
