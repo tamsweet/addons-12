@@ -1,0 +1,76 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 12px 16px 16px;
+  background: linear-gradient(180deg, rgba(12, 83, 148, 0.1), rgba(12, 83, 148, 0));
+  color: #0c2d48;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+header img {
+  width: 36px;
+  height: 36px;
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+main {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(12, 45, 72, 0.2);
+}
+
+.domain {
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.details p {
+  margin: 6px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  color: #a30015;
+  margin-top: 8px;
+}
+
+.availability {
+  margin-top: 12px;
+  font-style: italic;
+  color: #0c2d48;
+}
+
+footer {
+  text-align: right;
+  margin-top: 10px;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

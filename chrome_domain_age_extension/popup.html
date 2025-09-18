@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Domain Age</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="icons/icon48.png" alt="Domain Age icon" />
+      <h1>Domain Age</h1>
+    </header>
+    <main>
+      <p id="domain" class="domain">Loading...</p>
+      <div id="details" class="details hidden">
+        <p><strong>Registered:</strong> <span id="registered"></span></p>
+        <p><strong>Age:</strong> <span id="age"></span></p>
+        <p id="availability" class="availability"></p>
+      </div>
+      <p id="error" class="error hidden"></p>
+    </main>
+    <footer>
+      <a href="https://api.whois.vu/" target="_blank" rel="noopener">Powered by whois.vu</a>
+    </footer>
+    <script src="popup.js"></script>
+  </body>
+</html>
